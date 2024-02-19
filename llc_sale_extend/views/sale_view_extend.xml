@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+		<record id="inherit_sale_order_view_form" model="ir.ui.view">
+			<field name="name">inherit.sale.order.form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="etablissement"/>
+                    <field name="niveau_scolaire"/>
+                </field>
+            </field>
+		</record>
+
+		<record id="inherit_sale_order_view_tree" model="ir.ui.view">
+			<field name="name">inherit.sale.order.tree</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_quotation_tree"/>
+			<field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="etablissement" optional="hide"/>
+                    <field name="niveau_scolaire" optional="hide"/>
+                </field>
+            </field>
+		</record>
+    </data>
+</odoo>

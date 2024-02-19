@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+		<record id="inherit_product_extend_form" model="ir.ui.view">
+			<field name="name">inherit.product.template.extend.form</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_only_form_view"/>
+			<field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Autres infos">
+                        <group>
+                            <field name="fond"/>
+                            <field name="theme"/>
+                            <field name="collection"/>
+                            <field name="auteur"/>
+                            <field name="editeur"/>
+                            <field name="date_parution"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+		</record>
+    </data>
+</odoo>
