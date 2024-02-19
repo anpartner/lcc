@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_stock_picking_tree_inhe" model="ir.ui.view">
+        <field name="name">stock_picking.inherit.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                    <field name="amount_untaxed" sum="ht"/>
+                    <field name="amount_total" sum='ttc'/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_stock_picking_form_view_inhe" model="ir.ui.view">
+        <field name="name">stock_picking.inherit.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="price_unit2"/>
+                    <field name="tax_ids" widget='many2many_tags'/>
+                    <field name="discount"/>
+                    <field name="amount_untaxed"/>
+                    <field name="amount_tax"/>
+                    <field name="amount_total"/>
+                </xpath>
+               
+
+                <field name="origin" position="after">
+                    <field name="bl_fournisseur" attrs="{'invisible':[('picking_type_code','!=','incoming')]}"/>
+                    <field name="livreur"/>
+                    <field name="total_lettre"/>
+                </field>
+
+                <xpath expr="//notebook" position="after">
+                    <group name="amounnts" col="4">
+                        <group name="discount" colspan="2">
+                        </group>
+                        <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_untaxed" widget="monetary"/>
+                              <!--   <div>
+                                    <label for="amount_tax"/>
+                                </div> -->
+                                <field name="amount_tax"  widget="monetary"/>
+                                <field name="amount_total" class="oe_subtotal_footer_separator" widget="monetary"/>
+
+                            </group>
+                        </group>
+                            <div class="oe_clear"/>
+                </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="view_prodcut_template_tree_inhe" model="ir.ui.view">
+        <field name="name">product.template.inherit.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="list_price" position="after">
+                    <field name="margin"/>
+                    <field name="percent_margin"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
